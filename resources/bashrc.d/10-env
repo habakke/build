@@ -1,0 +1,15 @@
+#!/bin/bash
+
+export TIMEFORMAT=$'\a\n(  user %3U  +  sys %3S  )  / real %3R (%3lR)  =  CPU%% %P\n'
+export HISTTIMEFORMAT="[%Y-%m-%d %H:%M:%S]: "
+export HISTFILESIZE=999999
+export HISTSIZE=999999
+export HISTFILE=~/.bash_history
+export HISTCONTROL='ignorespace'
+export EDITOR="emacs -nw"
+export LS_COLORS+=":di=1;33;40"
+export PAGER='less -FiJMRSWX'
+export MANPAGER=$PAGER
+export PROMPT_DIRTRIM=3
+
+ssh-add -l

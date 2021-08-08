@@ -1,0 +1,30 @@
+#!/bin/bash
+
+if [ "$UID" == "0" ]; then      # If admin
+        userColor="\e[43m"
+else
+        groupsThatProbablyGiveSudo='admin|sudo'
+        if [[ $(groups) =~ $groupsThatProbablyGiveSudo ]]; then
+                userColor="\e[33m"
+        else
+                userColor="\e[35m"
+        fi
+fi
+
+export GIT_PS1_SHOWDIRTYSTATE=1
+export GIT_PS1_SHOWSTASHSTATE=1
+export GIT_PS1_SHOWUNTRACKEDFILES=1
+export GIT_PS1_SHOWUPSTREAM="auto"
+
+export PROMPT_COMMAND=""
+export PROMPT_COMMAND+='export NJOBS=$(jobs | wc -l);'
+export PS1=""
+export PS1+='\[\e[0;33m\]${?#0} ' # optional exit status
+export PS1+='\[\e[0;35m\]${NJOBS#0}'
+export PS1+='\[\e[0;31m\]\u@\h:' # authority
+export PS1+='\[\e[0;36m\]\w$(__git_ps1 " (%s)")' # path
+export PS1+='\['"${userColor}"'\]\$\[\e[92m\] ' # command separator
+
+case "$TERM" in
+        screen|xterm*|rxvt*) PS1+="\[\e]0;\u@\h:\w\a\]";; # window title
+esac
