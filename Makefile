@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 .PHONY:
 
-ID=docker-build
+ID=build
 
 docker-build:
 	docker build \
