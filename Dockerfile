@@ -20,6 +20,7 @@ run apt-get update && apt-get install -y \
 	git-crypt \
 	gcc \
 	supervisor \
+	go-bindata \
 	make
 
 # create user(s)
