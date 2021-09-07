@@ -21,6 +21,7 @@ run apt-get update && apt-get install -y \
 	gcc \
 	supervisor \
 	go-bindata \
+  yarn \
 	make
 
 # create user(s)
@@ -54,6 +55,8 @@ RUN set -eux; \
 	\
 	dockerd --version; \
 	docker --version
+
+RUN curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.41.1
 
 RUN wget -P /etc/ssl/certs https://github.com/pexip/ca-certificates/raw/master/videxio.pem
 RUN wget -P /etc/ssl/certs https://github.com/pexip/ca-certificates/raw/master/pravda.pem
