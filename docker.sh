@@ -6,9 +6,9 @@ HOME_PATH=$(eval echo ~$USER)
 CODE_PATH=$(git rev-parse --show-toplevel)/..
 
 docker run --cap-add CAP_NET_ADMIN --cap-add CAP_SYS_ADMIN -it \
-     --mount type=bind,source="${GOPATH}/pkg/mod",target="/go/pkg/mod" \
 	   --mount type=bind,source="${CODE_PATH}",target="/home/drift/code" \
-		 --mount type=bind,source="${HOME_PATH}/.docker/config.json",target="/home/drift/.docker/config.json" \
+	   --mount type=bind,source="${HOME_PATH}/.config/gcloud",target="/home/drift/.config/gcloud" \
+	   --mount type=bind,source="${HOME_PATH}/.docker/config.json",target="/home/drift/.docker/config.json" \
 	   --mount type=bind,source="${HOME_PATH}/.ssh/known_hosts",target="/home/drift/.ssh/known_hosts" \
 	   --mount type=bind,source="${HOME_PATH}/.ssh/id_ed25519",target="/home/drift/.ssh/id_ed25519" \
 	   --mount type=bind,source="${HOME_PATH}/.ssh/id_ed25519-cert.pub",target="/home/drift/.ssh/id_ed25519-cert.pub" \

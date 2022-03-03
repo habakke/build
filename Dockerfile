@@ -68,6 +68,11 @@ COPY ./resources/docker/logger.sh /opt/bash-utils/logger.sh
 RUN chmod +x /usr/local/bin/startup.sh /usr/local/bin/modprobe
 VOLUME /var/lib/docker
 
+# install google gcloud sdk
+ENV CLOUDSDK_INSTALL_DIR /usr/local/gcloud/
+RUN curl -sSL https://sdk.cloud.google.com | bash
+ENV PATH $PATH:/usr/local/gcloud/google-cloud-sdk/bin
+
 # configure user env
 COPY ./resources/bashrc /home/${USER}/.bashrc
 COPY ./resources/bashrc.d /home/${USER}/.bashrc.d
