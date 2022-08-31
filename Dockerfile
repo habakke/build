@@ -2,15 +2,18 @@ FROM ubuntu:20.04
 ARG DEBIAN_FRONTEND=noninteractive
 ARG USER=drift
 ARG DOCKER_VERSION=20.10.8
-ARG GOLANG_VERSION=1.17.8
+ARG GOLANG_VERSION=1.15.15
 
 WORKDIR /opt
 
-run apt-get update && apt-get install -y \
-  ca-certificates \
+RUN apt-get update && apt-get install --no-install-recommends -y ca-certificates curl gnupg
+COPY ./resources/sources.list.d/* /etc/apt/sources.list.d
+RUN curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add -
+RUN curl -fsSL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+
+RUN apt-get update && apt-get install --no-install-recommends -y \
 	iptables \
 	wget \
-	curl \
 	unzip \
 	vim \
 	ssh \
@@ -21,7 +24,8 @@ run apt-get update && apt-get install -y \
 	gcc \
 	supervisor \
 	go-bindata \
-  yarn \
+	nodejs \
+	yarn \
 	make
 
 # create user(s)
