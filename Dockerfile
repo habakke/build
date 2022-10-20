@@ -22,10 +22,12 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 	sudo \
 	git-crypt \
 	gcc \
+	libc6-dev \
 	supervisor \
 	go-bindata \
 	nodejs \
 	yarn \
+	libc6-dev \
 	make
 
 # create user(s)
